@@ -1,0 +1,37 @@
+CREATE DATABASE IF NOT EXISTS crm;
+USE crm;
+
+-- Tabla: Clientes
+CREATE TABLE clientes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100),
+  email VARCHAR(100),
+  telefono VARCHAR(20)
+);
+
+-- Tabla: Contactos
+CREATE TABLE contactos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_cliente INT,
+  fecha DATE,
+  motivo VARCHAR(100),
+  FOREIGN KEY (id_cliente) REFERENCES clientes(id)
+);
+
+-- Tabla: Campañas
+CREATE TABLE campanas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100),
+  descripcion TEXT,
+  fecha_inicio DATE,
+  fecha_fin DATE
+);
+
+-- Tabla: Historial de Contacto
+CREATE TABLE historial_contacto (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_contacto INT,
+  medio VARCHAR(50),
+  resultado TEXT,
+  FOREIGN KEY (id_contacto) REFERENCES contactos(id)
+);

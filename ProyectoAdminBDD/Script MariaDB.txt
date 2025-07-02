@@ -1,0 +1,37 @@
+CREATE DATABASE IF NOT EXISTS siniestros;
+USE siniestros;
+
+-- Tabla: Siniestros
+CREATE TABLE siniestros (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  descripcion TEXT,
+  fecha DATE,
+  monto_estimado DECIMAL(10,2)
+);
+
+-- Tabla: Reclamos
+CREATE TABLE reclamos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_siniestro INT,
+  fecha DATE,
+  estado VARCHAR(50),
+  FOREIGN KEY (id_siniestro) REFERENCES siniestros(id)
+);
+
+-- Tabla: Evaluaciones
+CREATE TABLE evaluaciones (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_reclamo INT,
+  resultado TEXT,
+  evaluador VARCHAR(100),
+  FOREIGN KEY (id_reclamo) REFERENCES reclamos(id)
+);
+
+-- Tabla: Atenciones
+CREATE TABLE atenciones (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_reclamo INT,
+  fecha DATE,
+  observaciones TEXT,
+  FOREIGN KEY (id_reclamo) REFERENCES reclamos(id)
+);
